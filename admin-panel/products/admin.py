@@ -11,7 +11,7 @@ class ReviewInline(admin.TabularInline):  # StackedInline farklı bir görünüm
     # max_num = 20
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("name", "create_date", "is_in_stock", "update_date","added_days_ago")
+    list_display = ("name", "create_date", "is_in_stock", "update_date","added_days_ago","how_many_reviews")
     list_editable = ( "is_in_stock", )
     # list_display_links = ("create_date", )
     list_filter = ("is_in_stock", "create_date")
@@ -20,6 +20,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_per_page = 25
     prepopulated_fields = {'slug' : ('name',)}
     date_hierarchy = "update_date"
+    inlines = (ReviewInline,)
     # fields = (('name', 'slug'), 'description', "is_in_stock")
     fieldsets = (
         ("primary", {

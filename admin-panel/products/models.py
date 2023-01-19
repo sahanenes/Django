@@ -11,6 +11,10 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Product"
         verbose_name_plural = "Products"
+
+    def how_many_reviews(self):
+        count = self.reviews.count()
+        return count
     
     def __str__(self):
         return self.name
