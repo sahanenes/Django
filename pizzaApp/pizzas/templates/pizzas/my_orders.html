@@ -1,5 +1,5 @@
 {% extends 'pizzas/base.html' %} {% block content %}
-<div class="d-flex flex-column justify-content-center mx-auto mt-5 col-md-6">
+<div class="d-flex flex-column justify-content-center mx-auto mt-5 col-md-9">
   <div class="alert alert-warning text-center p-1">
     <h1>{{user.username | upper}}'s Orders</h1>
   </div>
@@ -13,7 +13,7 @@
           alt="..."
         />
       </div>
-      <div class="col-md-5 d-flex justify-content-start flex-fill">
+      <div class="col-md-4 d-flex justify-content-start flex-fill">
         <div class="card-body">
           <p class="card-title">
             <strong>Pizza:</strong> {{order.pizza}} 🍕
@@ -23,8 +23,12 @@
         </div>
       </div>
       <div class="col-md-2 d-flex align-items-center rounded">
-        <button class="btn btn-warning me-2">Update</button>
-        <button class="btn btn-danger me-2">Delete</button>
+        <a href="{% url 'update_orders' order.id %}">
+          <button class="btn btn-warning me-2">Update</button></a
+        >
+        <a href="{% url 'delete_orders' order.id %}"
+          ><button class="btn btn-danger me-2">Delete</button></a
+        >
       </div>
     </div>
   </div>

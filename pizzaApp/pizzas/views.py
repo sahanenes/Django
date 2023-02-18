@@ -24,7 +24,7 @@ def order_view(request, id):
             order.pizza = pizza
             order.user = request.user
             order.save()
-            return redirect('home')
+            return redirect('my_orders')
     context = {
         'pizza': pizza,
         'form': form
@@ -38,3 +38,25 @@ def my_orders(request):
         
     }
     return render(request, 'pizzas/my_orders.html',context)
+
+def update_order_view(request,id):
+    order = Order.objects.get(id=id)
+    pizza = Pizza.objects.get(id=order.pizza.id)
+    form = PizzaForm(instance=order)
+    if request.method == 'POST':
+        form = PizzaForm(request.POST,instance=order)
+        if form.is_valid():
+            order.save()
+            return redirect('my_orders')
+
+    context = {
+        'order' : order,
+        'pizza':pizza,
+        'form':form
+    }
+    return render(request, 'pizzas/update_orders.html',context)
+
+def delete_order_view(request,id):
+    order = Order.objects.get(id=id)
+    order.delete()
+    return redirect('my_orders')
